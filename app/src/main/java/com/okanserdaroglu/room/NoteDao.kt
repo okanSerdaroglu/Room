@@ -5,7 +5,8 @@ import androidx.room.*
 /** Dao is a database object
  *  methods created in this interface
  *  @Insert,  @Update ,@Delete annotations for basic operations
- *  @Query for specific operations
+ *  @Query for specific operations. sql queries should be true in this annotation
+ *  also room can return liveData
  */
 
 @Dao
