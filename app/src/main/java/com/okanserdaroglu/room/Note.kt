@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
  * */
 
 @Entity(tableName = "note_table")
-class note(
+class Note(
     var title: String,
     var description: String,
     var priority: Int
