@@ -1,5 +1,6 @@
 package com.okanserdaroglu.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 /** Dao is a database object
@@ -24,7 +25,7 @@ interface NoteDao {
     @Query("DELETE FROM note_table")
     fun deleteAllNotes ()
 
-    @Query("SELECT * FROM note_table ORDER BY priority DESC")
-    fun getAllNotes () : List<Note>
+    @Query("SELECT * FROM note_table ORDER BY priority DESC") /** returns live Note list from SELECT query */
+    fun getAllNotes () : LiveData<List<Note>>
 
 }
