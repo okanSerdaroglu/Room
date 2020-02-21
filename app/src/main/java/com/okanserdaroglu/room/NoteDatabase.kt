@@ -22,6 +22,11 @@ abstract class NoteDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
 
+    /** normally you can not call abstract methods directly. Because they don't have body.
+     *  However when you create an instance of NoteDatabase Room automatically generates
+     *  body of this abstract method.
+     */
+
     companion object {
 
         private var INSTANCE: NoteDatabase? = null

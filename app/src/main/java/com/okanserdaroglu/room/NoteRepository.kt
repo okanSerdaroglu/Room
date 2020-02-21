@@ -16,21 +16,29 @@ class NoteRepository(application: Application) {
     }
 
     fun insert(note: Note) {
-        NoteAsyncTask(noteDao,Operations.INSERT).execute(note)
+        NoteAsyncTask(noteDao, Operations.INSERT).execute(note)
     }
 
     fun update(note: Note) {
-        NoteAsyncTask(noteDao,Operations.UPDATE).execute(note)
+        NoteAsyncTask(noteDao, Operations.UPDATE).execute(note)
     }
 
     fun delete(note: Note) {
-        NoteAsyncTask(noteDao,Operations.DELETE).execute(note)
+        NoteAsyncTask(noteDao, Operations.DELETE).execute(note)
+    }
+
+    fun deleteAllNotes() {
+        NoteAsyncTask(noteDao, Operations.DELETE_ALL).execute()
+    }
+
+    fun getAllNotes(): LiveData<List<Note>> {
+        return allNotes
     }
 
 
-
     /** all database operations must be in background thread with room */
-    class NoteAsyncTask(private var noteDao: NoteDao, private var operation:Operations) : AsyncTask<Note, Void, Void>() {
+    class NoteAsyncTask(private var noteDao: NoteDao, private var operation: Operations) :
+        AsyncTask<Note, Void, Void>() {
 
         override fun doInBackground(vararg note: Note?): Void? {
             /** vararg is an array */
@@ -44,7 +52,12 @@ class NoteRepository(application: Application) {
                 Operations.UPDATE -> {
                     note[0]?.let { noteDao.delete(it) }
                 }
-
+                Operations.DELETE_ALL -> {
+                    noteDao.deleteAllNotes()
+                }
+                Operations.GET_ALL -> {
+                    noteDao.getAllNotes()
+                }
 
             }
             return null
@@ -52,9 +65,8 @@ class NoteRepository(application: Application) {
     }
 
 
-
-   enum class Operations {
-       INSERT,UPDATE,DELETE,DELETE_ALL,GET_ALL
-   }
+    enum class Operations {
+        INSERT, UPDATE, DELETE, DELETE_ALL, GET_ALL
+    }
 
 }
