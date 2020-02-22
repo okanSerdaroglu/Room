@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import androidx.room.Database
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 
@@ -17,7 +18,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 /** if two threads want to access this method synchronized
  * does not give permission it for dont creating multiple instances**/
 
-@Database(entities = [Note::class], version = 1)
+@Database(entities = [Note::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class NoteDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
@@ -44,7 +46,7 @@ abstract class NoteDatabase : RoomDatabase() {
             return INSTANCE
         }
 
-        var roomCallBack: Callback = object : Callback() {
+        private var roomCallBack: Callback = object : Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) { // do something after database has been created
                 INSTANCE?.let { PopulateDbAsyncTask(it).execute() }
             }
@@ -58,9 +60,9 @@ abstract class NoteDatabase : RoomDatabase() {
             var noteDao: NoteDao = db.noteDao()
 
             override fun doInBackground(vararg p0: Void?): Void? {
-                noteDao.insert(Note("Title 1", "Description 1", 1))
-                noteDao.insert(Note("Title 1", "Description 1", 1))
-                noteDao.insert(Note("Title 1", "Description 1", 1))
+                noteDao.insert(Note(1, "Title 1", "Description 1",1))
+                noteDao.insert(Note(2, "Title 2", "Description 2",2))
+                noteDao.insert(Note(3, "Title 3", "Description 3",3))
                 return null
 
             }
