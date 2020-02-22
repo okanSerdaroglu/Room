@@ -1,9 +1,10 @@
-package com.okanserdaroglu.room
+package com.okanserdaroglu.room.helper
 
 import androidx.lifecycle.LiveData
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.okanserdaroglu.room.data.Note
 
 class Converters {
     companion object {

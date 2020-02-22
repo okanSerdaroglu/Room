@@ -1,7 +1,8 @@
-package com.okanserdaroglu.room
+package com.okanserdaroglu.room.helper
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.okanserdaroglu.room.data.Note
 
 /** Dao is a database object
  *  methods created in this interface
@@ -14,7 +15,7 @@ import androidx.room.*
 interface NoteDao {
 
     @Insert
-    fun insert (note:Note)
+    fun insert (note: Note)
 
     @Update
     fun update (note: Note)
