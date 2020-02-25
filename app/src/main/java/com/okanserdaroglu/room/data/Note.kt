@@ -1,5 +1,6 @@
-package com.okanserdaroglu.room
+package com.okanserdaroglu.room.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -10,13 +11,14 @@ import androidx.room.PrimaryKey
  *  change column name using @ColumnInfo annotation
  * */
 
-@Entity(tableName = "note_table")
-class Note (
-    var title: String,
-    var description: String,
-    var priority: Int
-) {
 
+@Entity(tableName = "note_table")
+data class Note(
     @PrimaryKey(autoGenerate = true)
-    var id = Int
-}
+    @ColumnInfo(name = "id")          var id: Int,
+    @ColumnInfo(name = "title")       var title: String,
+    @ColumnInfo(name = "description") var description : String,
+    @ColumnInfo(name = "priority")    var priority : Int)
+
+
+

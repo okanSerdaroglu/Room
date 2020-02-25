@@ -1,8 +1,9 @@
-package com.okanserdaroglu.room
+package com.okanserdaroglu.room.helper
 
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
+import com.okanserdaroglu.room.data.Note
 
 class NoteRepository(application: Application) {
 
@@ -16,19 +17,31 @@ class NoteRepository(application: Application) {
     }
 
     fun insert(note: Note) {
-        NoteAsyncTask(noteDao, Operations.INSERT).execute(note)
+        NoteAsyncTask(
+            noteDao,
+            Operations.INSERT
+        ).execute(note)
     }
 
     fun update(note: Note) {
-        NoteAsyncTask(noteDao, Operations.UPDATE).execute(note)
+        NoteAsyncTask(
+            noteDao,
+            Operations.UPDATE
+        ).execute(note)
     }
 
     fun delete(note: Note) {
-        NoteAsyncTask(noteDao, Operations.DELETE).execute(note)
+        NoteAsyncTask(
+            noteDao,
+            Operations.DELETE
+        ).execute(note)
     }
 
     fun deleteAllNotes() {
-        NoteAsyncTask(noteDao, Operations.DELETE_ALL).execute()
+        NoteAsyncTask(
+            noteDao,
+            Operations.DELETE_ALL
+        ).execute()
     }
 
     fun getAllNotes(): LiveData<List<Note>> {
