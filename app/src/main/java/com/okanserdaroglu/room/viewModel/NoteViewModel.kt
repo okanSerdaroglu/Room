@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.okanserdaroglu.room.data.Note
-import com.okanserdaroglu.room.helper.NoteRepository
+import com.okanserdaroglu.room.repository.NoteRepository
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
 

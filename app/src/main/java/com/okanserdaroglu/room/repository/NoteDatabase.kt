@@ -1,4 +1,4 @@
-package com.okanserdaroglu.room.helper
+package com.okanserdaroglu.room.repository
 
 import android.content.Context
 import android.os.AsyncTask
