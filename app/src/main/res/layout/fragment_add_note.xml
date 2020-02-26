@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="@dimen/margin_match_constraint"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_8"
+        android:hint="@string/title"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="@dimen/margin_match_constraint"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:hint="@string/description"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@id/editTextTitle"
+        app:layout_constraintStart_toStartOf="@id/editTextTitle"
+        app:layout_constraintTop_toBottomOf="@id/editTextTitle" />
+
+    <TextView
+        android:id="@+id/textViewPriority"
+        android:layout_width="@dimen/margin_match_constraint"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        android:text="@string/priority"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/editTextDescription"
+        app:layout_constraintStart_toStartOf="@id/editTextDescription"
+        app:layout_constraintTop_toBottomOf="@id/editTextDescription" />
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_8"
+        app:layout_constraintStart_toStartOf="@id/textViewPriority"
+        app:layout_constraintTop_toBottomOf="@id/textViewPriority" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
