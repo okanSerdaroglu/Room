@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /*
         val recyclerViewNotes = findViewById<RecyclerView>(R.id.recyclerViewNotes)
         recyclerViewNotes.layoutManager = LinearLayoutManager(this)
         recyclerViewNotes.setHasFixedSize(true)
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         val noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         noteViewModel.getAllNotes().observe(this, Observer {
             adapter.setNotes(it)
-        })
+        })*/
 
     }
 }

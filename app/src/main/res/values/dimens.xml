@@ -2,4 +2,5 @@
 <resources>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_match_constraint">0dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
 </resources>
