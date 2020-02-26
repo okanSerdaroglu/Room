@@ -39,10 +39,10 @@
         app:layout_constraintTop_toBottomOf="@id/editTextDescription" />
 
     <NumberPicker
+        android:id="@+id/numberPickerPriority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
-        android:id="@+id/numberPickerPriority"
         app:layout_constraintStart_toStartOf="@id/textViewPriority"
         app:layout_constraintTop_toBottomOf="@id/textViewPriority" />
 

@@ -42,7 +42,7 @@ class AddNoteFragment : Fragment() {
         if (title.trim().isEmpty()
             || description.trim().isEmpty()
         ) {
-            Toast.makeText(activity, "Please insert title and description", Toast.LENGTH_LONG)
+            Toast.makeText(activity, getString(R.string.empty_note_message), Toast.LENGTH_LONG)
                 .show()
             return
         }
