@@ -7,6 +7,8 @@ import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.okanserdaroglu.room.R
+import com.okanserdaroglu.room.data.Note
+import com.okanserdaroglu.room.helper.AddNoteListener
 
 class AddNoteFragment : Fragment() {
 
@@ -20,13 +22,24 @@ class AddNoteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_add_note, container, false)
+        initViews(view)
+        return view
+    }
+
+    companion object {
+        private lateinit var addNoteListener: AddNoteListener
+        fun setListener(addNoteListener: AddNoteListener){
+            this.addNoteListener = addNoteListener
+        }
+    }
+
+    private fun initViews (view:View){
         editTextTitle = view.findViewById(R.id.editTextTitle)
         editTextDescription = view.findViewById(R.id.editTextDescription)
         numberPickerPriority = view.findViewById(R.id.numberPickerPriority)
-
         numberPickerPriority.minValue = 1
         numberPickerPriority.maxValue = 10
-        return view
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -37,7 +50,7 @@ class AddNoteFragment : Fragment() {
     private fun saveNote() {
         val title: String = editTextTitle.text.toString()
         val description: String = editTextDescription.text.toString()
-        var priority: Int = numberPickerPriority.value
+        val priority: Int = numberPickerPriority.value
 
         if (title.trim().isEmpty()
             || description.trim().isEmpty()
@@ -45,6 +58,10 @@ class AddNoteFragment : Fragment() {
             Toast.makeText(activity, getString(R.string.empty_note_message), Toast.LENGTH_LONG)
                 .show()
             return
+        } else {
+            val note:Note = Note(0,title,description,priority)
+            addNoteListener.saveNote(note)
+            activity?.onBackPressed()
         }
 
     }

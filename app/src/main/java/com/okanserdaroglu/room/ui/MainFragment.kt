@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.okanserdaroglu.room.R
 import com.okanserdaroglu.room.adapter.NoteAdapter
+import com.okanserdaroglu.room.data.Note
+import com.okanserdaroglu.room.helper.AddNoteListener
 import com.okanserdaroglu.room.viewModel.NoteViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : Fragment(),View.OnClickListener {
+class MainFragment : Fragment(),View.OnClickListener,AddNoteListener {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +45,13 @@ class MainFragment : Fragment(),View.OnClickListener {
 
     override fun onClick(p0: View?) {
         val action = MainFragmentDirections.actionMainFragmentToAddNoteFragment()
+        AddNoteFragment.setListener(this)
         NavHostFragment.findNavController(this).navigate(action)
+    }
+
+    override fun saveNote(note: Note) {
+        val noteViewModel : NoteViewModel? = activity?.application?.let { NoteViewModel(it) }
+        noteViewModel?.insert(note)
     }
 
 }

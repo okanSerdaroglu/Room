@@ -14,5 +14,10 @@
     <fragment
         android:id="@+id/addNoteFragment"
         android:name="com.okanserdaroglu.room.ui.AddNoteFragment"
-        android:label="AddNoteFragment" />
+        android:label="AddNoteFragment" >
+        <action
+            android:id="@+id/action_addNoteFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            />
+    </fragment>
 </navigation>
