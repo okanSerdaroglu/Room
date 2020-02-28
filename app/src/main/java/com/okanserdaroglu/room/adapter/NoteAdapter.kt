@@ -38,8 +38,12 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
         return noteList.size
     }
 
+    fun getNoteAtPosition (position: Int) : Note{
+        return noteList[position]
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var note = noteList[position]
+        val note = noteList[position]
         holder.textViewTitle.text = note.title
         holder.textViewDescription.text = note.description
         holder.textViewPriority.text = note.priority.toString()
