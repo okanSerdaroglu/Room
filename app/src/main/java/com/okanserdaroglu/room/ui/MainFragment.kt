@@ -18,10 +18,8 @@ import com.okanserdaroglu.room.viewModel.NoteViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
 
-class MainFragment(dragDirs: Int, swipeDirs: Int) : Fragment(), View.OnClickListener,
+class MainFragment : Fragment(), View.OnClickListener,
     AddNoteListener {
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +45,7 @@ class MainFragment(dragDirs: Int, swipeDirs: Int) : Fragment(), View.OnClickList
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        super.onViewCreated(view, savedInstanceState)
         val recyclerViewNotes = activity?.findViewById<RecyclerView>(R.id.recyclerViewNotes)
         recyclerViewNotes?.layoutManager = LinearLayoutManager(activity)
         buttonAddNote.setOnClickListener(this)
