@@ -63,7 +63,7 @@ class NoteRepository(application: Application) {
                     note[0]?.let { noteDao.delete(it) }
                 }
                 Operations.UPDATE -> {
-                    note[0]?.let { noteDao.delete(it) }
+                    note[0]?.let { noteDao.update(it) }
                 }
                 Operations.DELETE_ALL -> {
                     noteDao.deleteAllNotes()
