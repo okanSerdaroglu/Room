@@ -53,7 +53,7 @@ class MainFragment : Fragment(), View.OnClickListener,
         val adapter = NoteAdapter()
         recyclerViewNotes?.adapter = adapter
 
-        var noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        val noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         noteViewModel.getAllNotes().observe(viewLifecycleOwner, Observer {
             adapter.setNotes(it)
         })

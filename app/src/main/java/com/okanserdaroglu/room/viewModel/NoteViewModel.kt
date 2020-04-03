@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import com.okanserdaroglu.room.data.Note
 import com.okanserdaroglu.room.repository.NoteRepository
 
-class NoteViewModel(application: Application) : AndroidViewModel(application) {
+class  NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     private var repository: NoteRepository =
         NoteRepository(application)
