@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.okanserdaroglu.room.R
 import com.okanserdaroglu.room.data.Note
-import com.okanserdaroglu.room.helper.AddNoteListener
+import com.okanserdaroglu.room.helper.NoteListener
 
 class AddNoteFragment : Fragment() {
 
@@ -27,11 +27,19 @@ class AddNoteFragment : Fragment() {
     }
 
     companion object {
-        private lateinit var addNoteListener: AddNoteListener
-        fun setListener(addNoteListener: AddNoteListener){
-            this.addNoteListener = addNoteListener
+        private lateinit var noteListener: NoteListener
+        private lateinit var operationType: OperationTypes
+
+        fun setListener(noteListener: NoteListener){
+            this.noteListener = noteListener
         }
+
+        fun setOperationType (operationType : OperationTypes){
+            this.operationType = operationType
+        }
+
     }
+
 
     private fun initViews (view:View){
         editTextTitle = view.findViewById(R.id.editTextTitle)
@@ -60,7 +68,11 @@ class AddNoteFragment : Fragment() {
             return
         } else {
             val note:Note = Note(0,title,description,priority)
-            addNoteListener.saveNote(note)
+            if (operationType == OperationTypes.INSERT){
+                noteListener.saveNote(note)
+            } else if (operationType == OperationTypes.UPDATE){
+                noteListener.updateNote(note)
+            }
             activity?.onBackPressed()
         }
 
@@ -74,6 +86,10 @@ class AddNoteFragment : Fragment() {
             super.onOptionsItemSelected(item)
         }
 
+    }
+
+    enum class OperationTypes {
+        INSERT, UPDATE
     }
 
 }

@@ -13,13 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.okanserdaroglu.room.R
 import com.okanserdaroglu.room.adapter.NoteAdapter
 import com.okanserdaroglu.room.data.Note
-import com.okanserdaroglu.room.helper.AddNoteListener
+import com.okanserdaroglu.room.helper.NoteListener
 import com.okanserdaroglu.room.viewModel.NoteViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
 
 class MainFragment : Fragment(), View.OnClickListener,
-    AddNoteListener {
+    NoteListener {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +51,7 @@ class MainFragment : Fragment(), View.OnClickListener,
         buttonAddNote.setOnClickListener(this)
         recyclerViewNotes?.setHasFixedSize(true)
         val adapter = NoteAdapter()
+        adapter.setListener(this)
         recyclerViewNotes?.adapter = adapter
 
         val noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
@@ -78,15 +79,28 @@ class MainFragment : Fragment(), View.OnClickListener,
 
     }
 
-    override fun onClick(p0: View?) {
+    override fun onClick(p0: View?) { // floating action button click
         val action = MainFragmentDirections.actionMainFragmentToAddNoteFragment()
         AddNoteFragment.setListener(this)
+        AddNoteFragment.setOperationType(AddNoteFragment.OperationTypes.INSERT)
         NavHostFragment.findNavController(this).navigate(action)
     }
 
     override fun saveNote(note: Note) {
         val noteViewModel: NoteViewModel? = activity?.application?.let { NoteViewModel(it) }
         noteViewModel?.insert(note)
+    }
+
+    override fun updateNote(note: Note) {
+        val noteViewModel: NoteViewModel? = activity?.application?.let { NoteViewModel(it) }
+        noteViewModel?.update(note)
+    }
+
+    override fun sendNoteInAddNoteFragment(note: Note) {
+        val action = MainFragmentDirections.actionMainFragmentToAddNoteFragment()
+        AddNoteFragment.setListener(this)
+        AddNoteFragment.setOperationType(AddNoteFragment.OperationTypes.UPDATE)
+        NavHostFragment.findNavController(this).navigate(action)
     }
 
 
